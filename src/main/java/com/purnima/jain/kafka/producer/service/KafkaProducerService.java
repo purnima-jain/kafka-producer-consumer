@@ -15,11 +15,15 @@ public class KafkaProducerService {
 
 	private static final Logger logger = LoggerFactory.getLogger(KafkaProducerService.class);
 
-	@Autowired
 	private KafkaTemplate<String, String> kafkaTemplate;
 	
 	@Value("#{kafkaConfig.topicName()}")
 	private String topicName;
+	
+	@Autowired
+	KafkaProducerService(KafkaTemplate<String, String> kafkaTemplate) {
+		this.kafkaTemplate = kafkaTemplate;
+	}
 
 	public void sendMessage(String message) {
 
